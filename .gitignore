@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/.tool-versions
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -17,6 +18,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/vendor/bundle
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
