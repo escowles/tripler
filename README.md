@@ -1,24 +1,8 @@
-# README
+# tripler
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+this is a toy rails app that lets you edit rdf triples
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+basic models:
+* vocabs have predicates and objects
+* subjects have statements
+  * statements have predicates and objects or literals
