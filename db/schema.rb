@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_110345) do
+ActiveRecord::Schema.define(version: 2021_05_09_122507) do
+
+  create_table "objs", force: :cascade do |t|
+    t.integer "vocab_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["vocab_id"], name: "index_objs_on_vocab_id"
+  end
 
   create_table "predicates", force: :cascade do |t|
     t.string "name"
@@ -43,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_05_09_110345) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "objs", "vocabs"
   add_foreign_key "predicates", "vocabs"
   add_foreign_key "statements", "predicates"
   add_foreign_key "statements", "subjects"

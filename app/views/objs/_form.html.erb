@@ -1,10 +1,10 @@
-<%= form_with(model: [@vocab, predicate], local: true) do |form| %>
-  <% if predicate.errors.any? %>
+<%= form_with(model: [@vocab, obj], local: true) do |form| %>
+  <% if obj.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(predicate.errors.count, "error") %> prohibited this predicate from being saved:</h2>
+      <h2><%= pluralize(obj.errors.count, "error") %> prohibited this obj from being saved:</h2>
 
       <ul>
-        <% predicate.errors.full_messages.each do |message| %>
+        <% obj.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

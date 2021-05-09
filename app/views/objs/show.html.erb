@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Vocab:</strong>
+  <%= @obj.vocab.prefix %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @obj.name %>
+</p>
+
+<%= link_to 'Edit', edit_vocab_obj_path(@vocab, @obj) %> |
+<%= link_to 'Back', vocab_path(@vocab) %>

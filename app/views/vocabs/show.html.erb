@@ -17,6 +17,14 @@
 <% end %>
 </ul>
 
+<h2>Objects</h2>
+<ul>
+<% for obj in @vocab.objs %>
+  <li><%= obj.name %></li>
+<% end %>
+</ul>
+
 <%= link_to 'Edit', edit_vocab_path(@vocab) %> |
 <%= link_to 'Add Predicate', new_vocab_predicate_path(@vocab) %> |
+<%= link_to 'Add Object', new_vocab_obj_path(@vocab) %> |
 <%= link_to 'Back', vocabs_path %>

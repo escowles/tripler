@@ -1,5 +1,5 @@
 class PredicatesController < ApplicationController
-  before_action :get_vocab
+  before_action :set_vocab
   before_action :set_predicate, only: %i[ show edit update destroy ]
 
   # GET /predicates or /predicates.json
@@ -68,7 +68,7 @@ class PredicatesController < ApplicationController
       params.require(:predicate).permit(:name, :vocab_id)
     end
 
-    def get_vocab
+    def set_vocab
       @vocab = Vocab.find(params[:vocab_id])
     end
 end

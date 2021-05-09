@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Objects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Vocab</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @objs.each do |obj| %>
+      <tr>
+        <td><%= obj.vocab_id %></td>
+        <td><%= obj.name %></td>
+        <td><%= link_to 'Show', vocab_obj_path(@vocab, obj) %></td>
+        <td><%= link_to 'Edit', edit_vocab_obj_path(@vocab, obj) %></td>
+        <td><%= link_to 'Destroy', [@vocab, obj], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Object', new_vocab_obj_path(@vocab) %>
