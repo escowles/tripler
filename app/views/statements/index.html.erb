@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Statements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Predicate</th>
+      <th>Literal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @statements.each do |statement| %>
+      <tr>
+        <td><%= statement.subject_id %></td>
+        <td><%= statement.predicate_id %></td>
+        <td><%= statement.literal %></td>
+        <td><%= link_to 'Show', subject_statement_path(@subject, statement) %></td>
+        <td><%= link_to 'Edit', edit_subject_statement_path(@subject, statement) %></td>
+        <td><%= link_to 'Destroy', [@subject, statement], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Statement', new_subject_statement_path(@subject) %>

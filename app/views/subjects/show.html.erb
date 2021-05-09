@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @subject.uri %>
+</p>
+
+<h2>Statements</h2>
+<ul>
+<% for statement in @subject.statements %>
+  <li>
+    <%= statement.predicate %>: <%= statement.literal %> |
+    <%= link_to "Edit", edit_subject_statement_path(@subject, statement) %> |
+    <%= link_to "Destroy", [@subject, statement], method: :delete, data: { confirm: "Are you sure?" } %>
+  </li>
+<% end %>
+</ul>
+
+<%= link_to 'Edit', edit_subject_path(@subject) %> |
+<%= link_to 'Add Statement', new_subject_statement_path(@subject) %> |
+<%= link_to 'Back', subjects_path %>

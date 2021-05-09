@@ -11,9 +11,8 @@
     </div>
   <% end %>
 
-  <div>vocab: <%= @vocab.prefix %>
-    <%= form.hidden_field :vocab_id, value: @vocab.id %>
-  </div>
+  <div>vocab: <%= @vocab.prefix %></div>
+  <%= form.hidden_field :vocab_id, value: @vocab.id %>
 
   <div class="field">
     <%= form.label :name %>

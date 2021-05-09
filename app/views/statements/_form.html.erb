@@ -1,0 +1,31 @@
+<%= form_with(model: [@subject, statement], local: true) do |form| %>
+  <% if statement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(statement.errors.count, "error") %> prohibited this statement from being saved:</h2>
+
+      <ul>
+        <% statement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>subject: <%= @subject.uri %></div>
+  <%= form.hidden_field :subject_id, value: @subject.id %>
+
+  <!-- TODO: pick list -->
+  <div class="field">
+    <%= form.label :predicate_id %>
+    <%= form.text_field :predicate_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :literal %>
+    <%= form.text_field :literal %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

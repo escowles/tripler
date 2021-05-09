@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @statement.subject.uri %>
+</p>
+
+<p>
+  <strong>Predicate:</strong>
+  <%= @statement.predicate %>
+</p>
+
+<p>
+  <strong>Literal:</strong>
+  <%= @statement.literal %>
+</p>
+
+<%= link_to 'Edit', edit_subject_statement_path(@subject, @statement) %> |
+<%= link_to 'Back', subject_path(@subject) %>

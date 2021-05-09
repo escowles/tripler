@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_103612) do
+ActiveRecord::Schema.define(version: 2021_05_09_110345) do
 
   create_table "predicates", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,22 @@ ActiveRecord::Schema.define(version: 2021_05_09_103612) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["vocab_id"], name: "index_predicates_on_vocab_id"
+  end
+
+  create_table "statements", force: :cascade do |t|
+    t.integer "subject_id", null: false
+    t.integer "predicate_id", null: false
+    t.string "literal"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["predicate_id"], name: "index_statements_on_predicate_id"
+    t.index ["subject_id"], name: "index_statements_on_subject_id"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "uri"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "vocabs", force: :cascade do |t|
@@ -28,4 +44,6 @@ ActiveRecord::Schema.define(version: 2021_05_09_103612) do
   end
 
   add_foreign_key "predicates", "vocabs"
+  add_foreign_key "statements", "predicates"
+  add_foreign_key "statements", "subjects"
 end
