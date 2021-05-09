@@ -1,0 +1,27 @@
+<%= form_with(model: [@vocab, predicate], local: true) do |form| %>
+  <% if predicate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(predicate.errors.count, "error") %> prohibited this predicate from being saved:</h2>
+
+      <ul>
+        <% predicate.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>vocab: <%= @vocab.prefix %>
+    <%= form.hidden_field :vocab_id, value: @vocab.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

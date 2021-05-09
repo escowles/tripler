@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @predicate.name %>
+</p>
+
+<p>
+  <strong>Vocab:</strong>
+  <%= @predicate.vocab_id %>
+</p>
+
+<%= link_to 'Edit', edit_vocab_predicate_path(@vocab, @predicate) %> |
+<%= link_to 'Back', vocab_predicates_path(@vocab) %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Predicates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Vocab</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @predicates.each do |predicate| %>
+      <tr>
+        <td><%= predicate.name %></td>
+        <td><%= predicate.vocab.prefix %></td>
+        <td><%= link_to 'Show', vocab_predicate_path(@vocab, predicate) %></td>
+        <td><%= link_to 'Edit', edit_vocab_predicate_path(@vocab, predicate) %></td>
+        <td><%= link_to 'Destroy', [@vocab, predicate], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Predicate', new_vocab_predicate_path(@vocab) %>

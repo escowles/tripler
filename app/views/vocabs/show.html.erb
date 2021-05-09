@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Prefix:</strong>
+  <%= @vocab.prefix %>
+</p>
+
+<p>
+  <strong>Uri:</strong>
+  <%= @vocab.uri %>
+</p>
+
+<h2>Predicates</h2>
+<% for predicate in @vocab.predicates %>
+    <ul>
+      <li><%= predicate.name %></li>
+  </ul>
+<% end %>
+
+<%= link_to 'Edit', edit_vocab_path(@vocab) %> |
+<%= link_to 'Add Predicate', new_vocab_predicate_path(@vocab) %> |
+<%= link_to 'Back', vocabs_path %>

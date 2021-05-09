@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vocabs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prefix</th>
+      <th>Uri</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vocabs.each do |vocab| %>
+      <tr>
+        <td><%= vocab.prefix %></td>
+        <td><%= vocab.uri %></td>
+        <td><%= link_to 'Show', vocab %></td>
+        <td><%= link_to 'Edit', edit_vocab_path(vocab) %></td>
+        <td><%= link_to 'Destroy', vocab, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vocab', new_vocab_path %>
