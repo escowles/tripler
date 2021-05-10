@@ -26,4 +26,16 @@ RSpec.describe Subject, type: :model do
       expect(subj.uri).to eq("http://example.org/2")
     end
   end
+
+  describe "#valid?" do
+    let(:bad_uri) { Subject.new uri: "bogus" }
+
+    it "has a valid prefix and url" do
+      expect(subj).to be_valid
+    end
+
+    it "has to have a valid url" do
+      expect(bad_uri).not_to be_valid
+    end
+  end
 end

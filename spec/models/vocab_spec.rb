@@ -45,4 +45,21 @@ RSpec.describe Vocab, type: :model do
       expect(vocab.uri).to eq("http://example.org/foo#")
     end
   end
+
+  describe "#valid?" do
+    let(:bad_url) { Vocab.new prefix: "foo", uri: "bogus" }
+    let(:bad_prefix) { Vocab.new prefix: "", uri: "http://example.org/" }
+
+    it "has a valid prefix and url" do
+      expect(vocab).to be_valid
+    end
+
+    it "has to have a valid prefix" do
+      expect(bad_prefix).not_to be_valid
+    end
+
+    it "has to have a valid url" do
+      expect(bad_url).not_to be_valid
+    end
+  end
 end
