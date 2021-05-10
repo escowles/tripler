@@ -63,9 +63,19 @@ class StatementsController < ApplicationController
       @statement = @subject.statements.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # strip literal if there is a non-literal object
     def statement_params
-      params.require(:statement).permit(:subject_id, :predicate_id, :literal)
+      return raw_params.except(:literal) if non_literal?
+      raw_params
+    end
+
+    # Only allow a list of trusted parameters through.
+    def raw_params
+      @raw_params ||= params.require(:statement).permit(:subject_id, :predicate_id, :literal, :obj_id, :resource_object_id)
+    end
+
+    def non_literal?
+      raw_params[:obj_id].present? || raw_params[:resource_object_id].present?
     end
 
     def set_subject

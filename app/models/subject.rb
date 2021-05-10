@@ -3,4 +3,8 @@ class Subject < ApplicationRecord
 
   validates :uri, presence: true
   validates :uri, format: { with: URI.regexp }, if: :present?
+
+  def to_s
+    uri
+  end
 end

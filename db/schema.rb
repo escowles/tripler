@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_122507) do
+ActiveRecord::Schema.define(version: 2021_05_10_202451) do
 
   create_table "objs", force: :cascade do |t|
     t.integer "vocab_id", null: false
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 2021_05_09_122507) do
     t.string "literal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "obj_id"
+    t.integer "resource_object_id"
+    t.index ["obj_id"], name: "index_statements_on_obj_id"
     t.index ["predicate_id"], name: "index_statements_on_predicate_id"
     t.index ["subject_id"], name: "index_statements_on_subject_id"
   end
@@ -53,6 +56,7 @@ ActiveRecord::Schema.define(version: 2021_05_09_122507) do
 
   add_foreign_key "objs", "vocabs"
   add_foreign_key "predicates", "vocabs"
+  add_foreign_key "statements", "objs"
   add_foreign_key "statements", "predicates"
   add_foreign_key "statements", "subjects"
 end
