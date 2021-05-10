@@ -28,4 +28,26 @@ RSpec.describe Statement, type: :model do
       expect(stmt.predicate).to eq(pre2)
     end
   end
+
+  describe "#valid?" do
+    let(:bad_sub) { Statement.new subject: nil, predicate: pre, literal: "foo" }
+    let(:bad_pre) { Statement.new subject: sub, predicate: nil, literal: "foo" }
+    let(:bad_lit) { Statement.new subject: sub, predicate: pre, literal: "" }
+
+    it "has a valid subject, predicate, and literal" do
+      expect(stmt).to be_valid
+    end
+
+    it "has to have a valid subject" do
+      expect(bad_sub).not_to be_valid
+    end
+
+    it "has to have a valid predicate" do
+      expect(bad_pre).not_to be_valid
+    end
+
+    it "has to have a valid literal" do
+      expect(bad_lit).not_to be_valid
+    end
+  end
 end

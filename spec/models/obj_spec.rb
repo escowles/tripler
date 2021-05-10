@@ -27,4 +27,21 @@ RSpec.describe Obj, type: :model do
       expect(obj.to_s).to eq("ex:Foo")
     end
   end
+
+  describe "#valid?" do
+    let(:bad_name) { Obj.new name: "", vocab: vocab }
+    let(:bad_vocab) { Obj.new name: "foo", vocab: nil }
+
+    it "has a valid name and vocab" do
+      expect(obj).to be_valid
+    end
+
+    it "has to have a valid name" do
+      expect(bad_name).not_to be_valid
+    end
+
+    it "has to have a valid vocab" do
+      expect(bad_vocab).not_to be_valid
+    end
+  end
 end
