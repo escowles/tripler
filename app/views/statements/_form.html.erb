@@ -14,10 +14,9 @@
   <div>subject: <%= @subject.uri %></div>
   <%= form.hidden_field :subject_id, value: @subject.id %>
 
-  <!-- TODO: pick list -->
   <div class="field">
     <%= form.label :predicate_id %>
-    <%= form.text_field :predicate_id %>
+    <%= form.select(:predicate_id, Predicate.all.collect { |p| [p.to_s, p.id] }.sort) %>
   </div>
 
   <div class="field">
