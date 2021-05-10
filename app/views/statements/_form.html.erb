@@ -24,6 +24,16 @@
     <%= form.text_field :literal %>
   </div>
 
+  <div class="field">
+    <%= form.label :resource_object_id %>
+    <%= form.select(:resource_object_id, Subject.all.collect { |s| [s.uri, s.id] }.sort, include_blank: true) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :obj_id %>
+    <%= form.select(:obj_id, Obj.all.collect { |o| [o.to_s, o.id] }.sort, include_blank: true) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

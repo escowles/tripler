@@ -11,13 +11,13 @@
 <table>
   <tr>
     <th>predicate</th>
-    <th>literal</th>
+    <th>object</th>
     <th colspan="2"></th>
   </tr>
 <% for statement in @subject.statements %>
   <tr>
     <td><%= statement.predicate %></td>
-    <td><%= statement.literal %></td>
+    <td><%= format_object(statement.statement_object) %></td>
     <td><%= button_to "Edit", edit_subject_statement_path(@subject, statement), method: :get %></td>
     <td><%= button_to "Delete", subject_statement_path(@subject, statement), method: :delete %></td>
   </tr>
