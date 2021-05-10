@@ -15,8 +15,8 @@
   <tbody>
     <% @statements.each do |statement| %>
       <tr>
-        <td><%= statement.subject_id %></td>
-        <td><%= statement.predicate_id %></td>
+        <td><%= statement.subject.uri %></td>
+        <td><%= statement.predicate.to_s %></td>
         <td><%= statement.literal %></td>
         <td><%= link_to 'Show', subject_statement_path(@subject, statement) %></td>
         <td><%= link_to 'Edit', edit_subject_statement_path(@subject, statement) %></td>

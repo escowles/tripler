@@ -1,6 +1,31 @@
 require "rails_helper"
 
 RSpec.describe "Subjects", type: :request do
+  it "shows existing subjects" do
+    subj1 = Subject.create(uri: "http://example.org/1")
+    subj2 = Subject.create(uri: "http://example.org/2")
+
+    get "/subjects/"
+    expect(response).to render_template(:index)
+    expect(response.body).to include("http://example.org/1")
+    expect(response.body).to include("http://example.org/2")
+
+    # update a subject and make sure it's updated
+    put "/subjects/#{subj2.id}", params: { subject: { uri: "http://example.org/foo" } }
+    get "/subjects/"
+    expect(response).to render_template(:index)
+    expect(response.body).to include("http://example.org/1")
+    expect(response.body).not_to include("http://example.org/2")
+    expect(response.body).to include("http://example.org/foo")
+
+    # delete a subject and make sure it isn't listed
+    delete "/subjects/#{subj2.id}"
+    follow_redirect!
+    expect(response).to render_template(:index)
+    expect(response.body).to include("http://example.org/1")
+    expect(response.body).not_to include("http://example.org/2")
+    expect(response.body).not_to include("http://example.org/foo")
+  end
   it "creates a subject" do
     get "/subjects/new"
     expect(response).to render_template(:new)
