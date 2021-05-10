@@ -51,6 +51,22 @@ RSpec.describe "Subjects", type: :request do
 
     expect(response).to render_template(:show)
     expect(response.body).to include("Statement was successfully created.")
+  end
+  context "error handling" do
+    let(:sub) { Subject.create(uri: "http://example.org/1") }
+    let(:vocab) { Vocab.create(prefix: "ex", uri: "http://example.org/") }
+    let(:pre) { Predicate.create(vocab: vocab, name: "foo") }
 
+    it "does not create invalid statements" do
+      post "/subjects/#{sub.id}/statements", params: { statement: { subject: sub, predicate: pre, literal: "" } }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(:new)
+    end
+    it "does not update statements to be invalid" do
+      stmt = Statement.create(subject: sub, predicate: pre, literal: "foo")
+      put "/subjects/#{sub.id}/statements/#{stmt.id}", params: { statement: { subject: sub, predicate: pre, literal: "" } }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to render_template(:edit)
+    end
   end
 end

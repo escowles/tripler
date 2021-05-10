@@ -60,4 +60,15 @@ RSpec.describe "Vocabs", type: :request do
     expect(response).to render_template(:show)
     expect(response.body).to include("Obj was successfully created.")
   end
+  it "does not create invalid vocabs" do
+    post "/vocabs", params: { vocab: { prefix: "", uri: "http://example.org/" } }
+    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to render_template(:new)
+  end
+  it "does not update vocabs to be invalid" do
+    vocab = Vocab.create(prefix: "foo", uri: "http://example.org/foo#")
+    put "/vocabs/#{vocab.id}", params: { vocab: { prefix: "baz", uri: "bogus" } }
+    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to render_template(:edit)
+  end
 end

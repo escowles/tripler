@@ -40,4 +40,15 @@ RSpec.describe "Statements", type: :request do
     expect(response.body).not_to include("ex:baz")
     expect(response.body).not_to include("value3")
   end
+  it "does not create invalid subjects" do
+    post "/subjects", params: { subject: { uri: "bogus" } }
+    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to render_template(:new)
+  end
+  it "does not update subjects to be invalid" do
+    subject = Subject.create(uri: "http://example.org/foo#")
+    put "/subjects/#{subject.id}", params: { subject: { uri: "bogus" } }
+    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to render_template(:edit)
+  end
 end
