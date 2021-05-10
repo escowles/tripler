@@ -10,21 +10,29 @@
   <%= @vocab.uri %>
 </p>
 
+<%= link_to "Edit", edit_vocab_path(@vocab) %> |
+<%= link_to "Back", vocabs_path %>
+
 <h2>Predicates</h2>
-<ul>
+<table>
 <% for predicate in @vocab.predicates %>
-  <li><%= predicate.name %></li>
+  <tr>
+    <td><%= predicate.name %></td>
+    <td><%= button_to "Edit", edit_vocab_predicate_path(@vocab, predicate), method: :get %></td>
+    <td><%= button_to "Delete", vocab_predicate_path(@vocab, predicate), method: :delete %></td>
+  </tr>
 <% end %>
-</ul>
+</table>
+<%= button_to "Add Predicate", new_vocab_predicate_path(@vocab), method: :get %>
 
 <h2>Objects</h2>
-<ul>
+<table>
 <% for obj in @vocab.objs %>
-  <li><%= obj.name %></li>
+  <tr>
+    <td><%= obj.name %></td>
+    <td><%= button_to "Edit", edit_vocab_obj_path(@vocab, obj), method: :get %></td>
+    <td><%= button_to "Delete", vocab_obj_path(@vocab, obj), method: :delete %></td>
+  </tr>
 <% end %>
-</ul>
-
-<%= link_to 'Edit', edit_vocab_path(@vocab) %> |
-<%= link_to 'Add Predicate', new_vocab_predicate_path(@vocab) %> |
-<%= link_to 'Add Object', new_vocab_obj_path(@vocab) %> |
-<%= link_to 'Back', vocabs_path %>
+</table>
+<%= button_to "Add Predicate", new_vocab_obj_path(@vocab), method: :get %>

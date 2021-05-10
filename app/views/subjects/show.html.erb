@@ -4,18 +4,24 @@
   <strong>Subject:</strong>
   <%= @subject.uri %>
 </p>
+<%= link_to "Edit", edit_subject_path(@subject) %> |
+<%= link_to "Back", subjects_path %>
 
 <h2>Statements</h2>
-<ul>
+<table>
+  <tr>
+    <th>predicate</th>
+    <th>literal</th>
+    <th colspan="2"></th>
+  </tr>
 <% for statement in @subject.statements %>
-  <li>
-    <%= statement.predicate %>: <%= statement.literal %> |
-    <%= link_to "Edit", edit_subject_statement_path(@subject, statement) %> |
-    <%= link_to "Destroy", [@subject, statement], method: :delete, data: { confirm: "Are you sure?" } %>
-  </li>
+  <tr>
+    <td><%= statement.predicate %></td>
+    <td><%= statement.literal %></td>
+    <td><%= button_to "Edit", edit_subject_statement_path(@subject, statement), method: :get %></td>
+    <td><%= button_to "Delete", subject_statement_path(@subject, statement), method: :delete %></td>
+  </tr>
 <% end %>
-</ul>
+</table>
+<%= button_to "Add Statement", new_subject_statement_path(@subject), method: :get %>
 
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
-<%= link_to 'Add Statement', new_subject_statement_path(@subject) %> |
-<%= link_to 'Back', subjects_path %>
