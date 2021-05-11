@@ -8,6 +8,11 @@ class SubjectsController < ApplicationController
 
   # GET /subjects/1 or /subjects/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.text { render plain: @subject.to_rdf }
+    end
   end
 
   # GET /subjects/new
