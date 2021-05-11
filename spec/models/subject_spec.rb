@@ -17,6 +17,27 @@ RSpec.describe Subject, type: :model do
     end
   end
 
+  describe "#to_rdf" do
+    let(:sub) { Subject.create(uri: "http://example.org/1") }
+    let(:voc) { Vocab.create(prefix: "ex", uri: "http://example.org/") }
+    let(:pre) { Predicate.create(vocab: voc, name: "foo") }
+    let(:obj) { Obj.create(vocab: voc, name: "foo") }
+
+    it "handles literal objects" do
+      Statement.create(subject: sub, predicate: pre, literal: "bar")
+      expect(sub.to_rdf).to eq("<http://example.org/1> <http://example.org/foo> \"bar\" .\n")
+    end
+    it "handles resource objects" do
+      Statement.create(subject: sub, predicate: pre, resource_object: sub)
+      expect(sub.to_rdf).to eq("<http://example.org/1> <http://example.org/foo> <http://example.org/1> .\n")
+    end
+    it "handles uri objects" do
+      Statement.create(subject: sub, predicate: pre, obj: obj)
+      expect(sub.to_rdf).to eq("<http://example.org/1> <http://example.org/foo> <http://example.org/foo> .\n")
+    end
+  end
+
+
   describe "#uri" do
     it "has a uri" do
       expect(subj.uri).to eq("http://example.org/1")

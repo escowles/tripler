@@ -6,4 +6,8 @@ class Obj < ApplicationRecord
   def to_s
     "#{vocab.prefix}:#{name}"
   end
+
+  def uri
+    "#{vocab.uri}#{name}"
+  end
 end
